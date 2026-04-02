@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { RouteComponent } from "@tanstack/react-router";
+import type { RouteComponent } from "@tanstack/react-router";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export const PendingComponent: RouteComponent = () => {
