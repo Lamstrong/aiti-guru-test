@@ -27,6 +27,7 @@ import toast from 'react-hot-toast';
 
 import { useProductsList, type Product } from '../../../queries/products';
 import { TableTemplate } from '../../../../library/table';
+import dots from '../../../../assets/DotsThreeCircle.svg'
 
 export type ProductSearch = {
   q?: string;
@@ -189,9 +190,22 @@ function IndexComponent() {
         id: 'actions',
         header: '',
         cell: () => (
-          <Stack direction="row" spacing={1}>
-            <IconButton size="small" sx={{ bgcolor: '#242EDB', color: '#fff', width: '52px', height:'27px', borderRadius: '23px'}}>
+          <Stack direction="row" spacing={4} alignItems="center">
+            <IconButton
+              size="small"
+              sx={{
+                bgcolor: '#242EDB',
+                color: '#fff',
+                width: '52px',
+                height: '27px',
+                borderRadius: '23px',
+                '&:hover': { bgcolor: '#1a237e' }
+              }}
+            >
               <AddIcon fontSize="small" />
+            </IconButton>
+            <IconButton size="small" sx={{ p: 0 }}>
+              <img src={dots} alt="Dots" />
             </IconButton>
           </Stack>
         ),
@@ -222,7 +236,7 @@ function IndexComponent() {
     <Box sx={{ p: 4 }}>
 
       <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h4">Все позиции</Typography>
+        <Typography style={{ fontWeight: 600, fontSize: '14px' }} variant="h4">Все позиции</Typography>
         
         <Box display="flex" gap={2}>
           <IconButton sx={{
