@@ -24,7 +24,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 export const Route = createFileRoute('/login')({
   beforeLoad: ({ context }) => {
     if (context.auth?.isAuthenticated) {
-      throw redirect({ to: '/' });
+      throw redirect({ to: '/product/list', search: { page: 1, q: '', sortBy: '', order: 'asc' } });
     }
   },
   component: LoginComponent,
@@ -63,12 +63,10 @@ function LoginComponent() {
 
   const onSubmit = async (data: LoginFormData) => {
     try {
-      // Тут вызывается тот самый login из контекста (он сохраняет данные в зависимости от rememberMe)
       await login(data.username, data.password, data.rememberMe);
-      // Если всё успешно, идем на главную страницу
-      navigate({ to: '/' });
+
+      navigate({ to: '/product/list', search: { page: 1, q: '', sortBy: '', order: 'asc' } });
     } catch (err) {
-      // Ошибки уже показывает AuthProvider через toast
       console.error(err);
     }
   };
@@ -107,7 +105,6 @@ function LoginComponent() {
             borderRadius: '18px',
           }}
         >
-          {/* 1. Логотип */}
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
             <Box
               sx={{
@@ -123,7 +120,6 @@ function LoginComponent() {
             </Box>
           </Box>
 
-          {/* 2. Приветствие */}
           <Typography variant="h5" textAlign="center" mb={1} sx={{ fontWeight: '600' }}>
             Добро пожаловать!
           </Typography>
@@ -131,7 +127,6 @@ function LoginComponent() {
             Пожалуйста, авторизуйтесь
           </Typography>
 
-          {/* 3. Инпуты с кнопкой */}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, flex: 1 }}>
             <TextField
               label="Логин"
@@ -218,7 +213,6 @@ function LoginComponent() {
             </Button>
           </Box>
 
-          {/* 4. Нет аккаунта? Создать */}
           <Box sx={{ textAlign: 'center', mt: 3 }}>
             <Typography sx={{ fontSize: '14px', color: '#616161' }}>
               Нет аккаунта?{' '}

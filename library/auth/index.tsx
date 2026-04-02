@@ -1,4 +1,3 @@
-// src/library/auth-manager.tsx
 import {
   useState,
   useEffect,
@@ -68,7 +67,6 @@ export const AuthProvider = ({ children, loading }: AuthProviderProps) => {
     restoreAuth();
   }, [restoreAuth]);
 
-  // Логин — отправляем только username + password (как в DummyJSON)
   const login = async (username: string, password: string, rememberMe: boolean) => {
     setError(null);
     setIsLoading(true);
@@ -76,11 +74,10 @@ export const AuthProvider = ({ children, loading }: AuthProviderProps) => {
     try {
         const { accessToken: newToken } = await ky
           .post(`${API_BASE}/auth/login`, {
-            json: { username, password, expiresInMins: 60 * 24 * 7 }, // На 7 дней
+            json: { username, password, expiresInMins: 60 * 24 * 7 },
           })
           .json<{ accessToken: string }>();
 
-      // === ПРАВИЛА ИЗ ТЗ ===
       if (rememberMe) {
         localStorage.setItem('authToken', newToken);
         sessionStorage.removeItem('authToken');
@@ -100,11 +97,9 @@ export const AuthProvider = ({ children, loading }: AuthProviderProps) => {
       setUser(userData);
       toast.success('Успешный вход!');
     } catch (err: unknown) {
-      // Понятная типизация без any
       let message = 'Ошибка сервера. Попробуйте позже.';
 
       if (err instanceof Error) {
-        // Проверяем статус от ky
         const httpError = err as { response?: Response };
         if (httpError.response?.status === 400) {
           message = 'Неверный логин или пароль';
@@ -123,6 +118,7 @@ export const AuthProvider = ({ children, loading }: AuthProviderProps) => {
   const logout = () => {
     clearToken();
     toast.success('Вы вышли из системы');
+    // window.location.href = '/login';
   };
 
   const value: AuthContextType = {
