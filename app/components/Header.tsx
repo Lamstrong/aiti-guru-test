@@ -48,7 +48,7 @@ export function Header() {
                 backgroundColor: '#F3F4F6',
                 borderRadius: '8px',
                 px: 2,
-                width: '400px',
+                width: '1200px',
                 height: '44px',
               }}
             >

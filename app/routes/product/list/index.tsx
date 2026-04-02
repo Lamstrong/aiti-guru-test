@@ -168,7 +168,7 @@ function IndexComponent() {
             <Typography
               variant="body2"
             >
-              <span style={{ color: val < 3.5 ? 'red' : 'black' }}>{val}</span>/5
+              <span style={{ color: val < 3.5 ? '#F11010' : '#000000' }}>{val}</span>/5
             </Typography>
           );
         },
@@ -190,7 +190,7 @@ function IndexComponent() {
         header: '',
         cell: () => (
           <Stack direction="row" spacing={1}>
-            <IconButton size="small" color="primary" sx={{ bgcolor: 'primary.light' }}>
+            <IconButton size="small" sx={{ bgcolor: '#242EDB', color: '#fff', width: '52px', height:'27px', borderRadius: '23px'}}>
               <AddIcon fontSize="small" />
             </IconButton>
           </Stack>
@@ -205,7 +205,7 @@ function IndexComponent() {
     data: data?.products || [],
     columns,
     state: { sorting },
-    onSortingChange, // Используем функцию для обновления URL
+    onSortingChange,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     manualSorting: true,
@@ -237,7 +237,7 @@ function IndexComponent() {
             variant="contained"
             startIcon={<AddIcon />}
             onClick={() => setIsAddModalOpen(true)}
-            sx={{ textTransform: 'none', borderRadius: 2 }}
+            sx={{ textTransform: 'none', borderRadius: 2, height: '42px', width: '147px', backgroundColor: '#242EDB'}}
           >
             Добавить
           </Button>

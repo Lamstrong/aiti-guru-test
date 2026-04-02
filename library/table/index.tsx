@@ -128,7 +128,15 @@ export function TableTemplate<T>({
             page={page}
             onChange={(_, value) => onPageChange(value)}
             shape="rounded"
-            color="primary"
+            sx={{
+              '& .MuiPaginationItem-root.Mui-selected': {
+                backgroundColor: '#797FEA',
+                color: '#fff',
+                '&:hover': {
+                  backgroundColor: '#6b72d6',
+                },
+              },
+            }}
           />
         </Stack>
       )}
