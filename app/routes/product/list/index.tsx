@@ -28,6 +28,7 @@ import toast from 'react-hot-toast';
 import { useProductsList, type Product } from '../../../queries/products';
 import { TableTemplate } from '../../../../library/table';
 import dots from '../../../../assets/DotsThreeCircle.svg'
+import {AddCircleOutlineRounded } from '@mui/icons-material';
 
 export type ProductSearch = {
   q?: string;
@@ -249,7 +250,7 @@ function IndexComponent() {
           </IconButton>
           <Button
             variant="contained"
-            startIcon={<AddIcon />}
+            startIcon={<AddCircleOutlineRounded />}
             onClick={() => setIsAddModalOpen(true)}
             sx={{ textTransform: 'none', borderRadius: 2, height: '42px', width: '147px', backgroundColor: '#242EDB'}}
           >

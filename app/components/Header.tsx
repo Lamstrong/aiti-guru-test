@@ -2,12 +2,13 @@ import { Box, Typography, Button, InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAuth } from '../../library/auth/context';
 import { useSearchState } from '../hooks/useSearchState';
-import logo from '../../assets/logo.svg';
 
 export function Header() {
   const { user, logout, isAuthenticated } = useAuth();
   
   const { searchValue, handleSearchChange } = useSearchState();
+  
+  if (!isAuthenticated) return null;
 
   return (
     <Box
@@ -28,13 +29,6 @@ export function Header() {
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-          <img src={logo} alt="Logo" style={{ width: 40, height: 40 }} />
-          <Typography variant="h6" fontWeight="bold" sx={{ color: '#111827' }}>
-            AITI GURU
-          </Typography>
-        </Box>
-
         {isAuthenticated && (
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
              <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '20px', color: '#111827' }}>
