@@ -2,8 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
-export default defineConfig({
-  base: './',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/aiti-guru-test/' : '/',
   plugins: [
     TanStackRouterVite({
       target: "react",
@@ -18,4 +18,4 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-});
+}));
