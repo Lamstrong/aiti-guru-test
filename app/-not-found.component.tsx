@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { NotFoundRouteComponent } from "@tanstack/react-router";
+import { type NotFoundRouteComponent } from "@tanstack/react-router";
 
 import { RouterLink } from "../components/link";
 
