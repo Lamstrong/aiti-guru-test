@@ -1,4 +1,3 @@
-// src/main.tsx
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -22,14 +21,13 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <AuthProvider loading={<PendingComponent />}>
-      {/* AuthContext.Consumer — это просто "передатчик" контекста авторизации в роутер */}
       <AuthContext.Consumer>
         {(authContext) => (
           <ToastProvider>
             <RouterProvider
               router={router}
               context={{
-                auth: authContext,     // ← вот эта строчка важна для роутов
+                auth: authContext,   
               }}
             />
           </ToastProvider>
