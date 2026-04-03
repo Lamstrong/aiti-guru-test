@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react";
 import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
+  base: "/aiti-guru-test/",
   plugins: [
     TanStackRouterVite({
       target: "react",
@@ -15,6 +16,6 @@ export default defineConfig({
     port: 3001,
   },
   build: {
-    outDir: "build",
+    outDir: "dist",
   },
 });
