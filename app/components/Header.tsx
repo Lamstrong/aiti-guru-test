@@ -25,65 +25,60 @@ export function Header() {
         top: 0,
         zIndex: 1100,
         height: '80px',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-        {isAuthenticated && (
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-             <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '20px', color: '#111827' }}>
-              Товары
-            </Typography>
-            
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                backgroundColor: '#F3F4F6',
-                borderRadius: '8px',
-                px: 2,
-                width: '1200px',
-                height: '44px',
-              }}
-            >
-              <SearchIcon sx={{ color: '#9CA3AF', mr: 1 }} />
-              <InputBase
-                placeholder="Найти"
-                value={searchValue}
-                onChange={handleSearchChange}
-                fullWidth
-                sx={{ fontSize: '14px' }}
-              />
-            </Box>
-          </Box>
-        )}
+      <Typography variant="h6" sx={{ fontWeight: 700, fontSize: '20px', color: '#111827' }}>
+        Товары
+      </Typography>
+
+      <Box
+        sx={{
+          position: 'absolute',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#F3F4F6',
+          borderRadius: '8px',
+          px: 2,
+          width: '1023px',
+          height: '48px',
+        }}
+      >
+        <SearchIcon sx={{ color: '#9CA3AF', mr: 1 }} />
+        <InputBase
+          placeholder="Найти"
+          value={searchValue}
+          onChange={handleSearchChange}
+          fullWidth
+          sx={{ fontSize: '14px' }}
+        />
       </Box>
 
-      {isAuthenticated && (
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-          <Typography variant="body1" sx={{ fontWeight: 500, color: '#333' }}>
-            {user?.firstName} {user?.lastName}
-          </Typography>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={() => logout()}
-            sx={{
-              borderRadius: '8px',
-              textTransform: 'none',
-              fontWeight: 'bold',
-              borderColor: '#E5E7EB',
-              color: '#374151',
-              '&:hover': {
-                borderColor: '#D1D5DB',
-                backgroundColor: '#F9FAFB',
-              }
-            }}
-          >
-            Выйти
-          </Button>
-        </Box>
-      )}
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+        <Typography variant="body1" sx={{ fontWeight: 500, color: '#333' }}>
+          {user?.firstName} {user?.lastName}
+        </Typography>
+        <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => logout()}
+          sx={{
+            borderRadius: '8px',
+            textTransform: 'none',
+            fontWeight: 'bold',
+            borderColor: '#E5E7EB',
+            color: '#374151',
+            '&:hover': {
+              borderColor: '#D1D5DB',
+              backgroundColor: '#F9FAFB',
+            }
+          }}
+        >
+          Выйти
+        </Button>
+      </Box>
     </Box>
   );
 }
