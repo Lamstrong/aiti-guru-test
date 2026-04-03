@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 import { createFileRoute, redirect } from '@tanstack/react-router';
 import {
   Box,
@@ -227,9 +228,13 @@ function IndexComponent() {
     pageCount: data ? Math.ceil(data.total / pageSize) : 0,
   });
 
-  const handleAddProduct = (e: React.FormEvent) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm({
+    mode: 'onChange',
+  });
+
+  const handleAddProduct = () => {
     setIsAddModalOpen(false);
+    reset();
     toast.success('Товар успешно добавлен!');
   };
 
@@ -270,23 +275,82 @@ function IndexComponent() {
         />
       </Box>
 
-      <Dialog open={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} maxWidth="sm" fullWidth>
-        <form onSubmit={handleAddProduct}>
-          <DialogTitle>Добавить новый товар</DialogTitle>
-          <DialogContent dividers>
-            <Stack spacing={3} mt={1}>
-              <TextField label="Наименование" required fullWidth size="small" />
-              <TextField label="Цена" type="number" required fullWidth size="small" />
-              <TextField label="Вендор" required fullWidth size="small" />
-              <TextField label="Артикул" required fullWidth size="small" />
+      <Dialog
+        open={isAddModalOpen}
+        onClose={() => { setIsAddModalOpen(false); reset(); }}
+        maxWidth="xs"
+        fullWidth
+        PaperProps={{ sx: { borderRadius: '24px', p: 1 } }}
+      >
+        <form onSubmit={handleSubmit(handleAddProduct)}>
+          <DialogTitle sx={{ fontWeight: 600, textAlign: 'center', pt: 3 }}>
+            Добавить новый товар
+          </DialogTitle>
+          <DialogContent sx={{ border: 'none' }}>
+            <Stack spacing={2.5} mt={1}>
+              <TextField
+                label="Наименование"
+                fullWidth
+                {...register('title', { required: 'Введите наименование' })}
+                error={!!errors.title}
+                helperText={errors.title?.message as string}
+                InputProps={{ sx: { borderRadius: '12px' } }}
+              />
+              <TextField
+                label="Цена"
+                type="number"
+                fullWidth
+                {...register('price', {
+                  required: 'Введите цену',
+                  min: { value: 0.01, message: 'Цена должна быть больше 0' },
+                })}
+                error={!!errors.price}
+                helperText={errors.price?.message as string}
+                InputProps={{ sx: { borderRadius: '12px' } }}
+              />
+              <TextField
+                label="Вендор"
+                fullWidth
+                {...register('brand', { required: 'Введите вендора' })}
+                error={!!errors.brand}
+                helperText={errors.brand?.message as string}
+                InputProps={{ sx: { borderRadius: '12px' } }}
+              />
+              <TextField
+                label="Артикул"
+                fullWidth
+                {...register('sku', { required: 'Введите артикул' })}
+                error={!!errors.sku}
+                helperText={errors.sku?.message as string}
+                InputProps={{ sx: { borderRadius: '12px' } }}
+              />
             </Stack>
           </DialogContent>
-          <DialogActions sx={{ p: 2 }}>
-            <Button onClick={() => setIsAddModalOpen(false)} color="inherit">
-              Отмена
-            </Button>
-            <Button type="submit" variant="contained" disableElevation>
+          <DialogActions sx={{ p: 3, flexDirection: 'column', gap: 1.5 }}>
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={!isValid}
+              fullWidth
+              disableElevation
+              sx={{
+                borderRadius: '12px',
+                height: '54px',
+                textTransform: 'none',
+                fontWeight: 'bold',
+                fontSize: '16px',
+                backgroundColor: '#242EDB',
+                '&:hover': { backgroundColor: '#1a237e' },
+              }}
+            >
               Сохранить
+            </Button>
+            <Button
+              fullWidth
+              onClick={() => { setIsAddModalOpen(false); reset(); }}
+              sx={{ textTransform: 'none', color: '#9E9E9E' }}
+            >
+              Отмена
             </Button>
           </DialogActions>
         </form>
