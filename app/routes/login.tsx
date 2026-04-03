@@ -80,6 +80,7 @@ function LoginComponent() {
         justifyContent: 'center',
         minHeight: '100vh',
         backgroundColor: '#FAFAFA',
+        boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
       }}
     >
       <Box
@@ -89,8 +90,8 @@ function LoginComponent() {
           height: '716px',
           width: '527px',
           p: '6px',
-          borderRadius: '24px',
-          background: 'linear-gradient(180deg, #EDEDED 20%, rgba(237, 237, 237, 0) 100%)',
+          borderRadius: '34px',
+          background: 'linear-gradient(180deg, #ffff 20%, rgba(237, 237, 237, 0) 100%)',
         }}
       >
         <Box
@@ -101,8 +102,9 @@ function LoginComponent() {
             flexDirection: 'column',
             flex: 1,
             p: '48px',
-            backgroundColor: 'white',
-            borderRadius: '18px',
+            border: '1px solid #EDEDED',
+            backgroundColor: '#FFFFFF',
+            borderRadius: '34px',
           }}
         >
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 3 }}>
@@ -120,12 +122,14 @@ function LoginComponent() {
             </Box>
           </Box>
 
-          <Typography variant="h5" textAlign="center" mb={1} sx={{ fontWeight: '600' }}>
+          <Box>
+            <Typography variant="h5" textAlign="center" mb={1} sx={{ fontWeight: '600', fontSize: '40px' }}>
             Добро пожаловать!
           </Typography>
           <Typography textAlign="center" mb={4} sx={{ fontSize: '14px', color: '#9E9E9E' }}>
             Пожалуйста, авторизуйтесь
           </Typography>
+          </Box>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2.5, flex: 1 }}>
             <TextField
@@ -174,7 +178,7 @@ function LoginComponent() {
                       onMouseDown={handleMouseDownPassword}
                       edge="end"
                     >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                      {!showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
                 ) : null,
@@ -182,8 +186,9 @@ function LoginComponent() {
             />
 
               <FormControlLabel
-                control={<Checkbox {...register('rememberMe')} color="primary" />}
-                label={<Typography sx={{ fontSize: '14px', color: '#616161' }}>Запомнить меня</Typography>}
+                control={<Checkbox {...register('rememberMe')} sx={{ color: '#9C9C9C', '&.Mui-checked': { color: '#242EDB' }, p: 0, mr: 1 }} />}
+                label={<Typography sx={{ fontSize: '14px', color: '#9C9C9C' }}>Запомнить данные</Typography>}
+                sx={{ width: '185px', height: '24px', m: 0 }}
               />
   
 
@@ -211,12 +216,18 @@ function LoginComponent() {
             >
               {isLoading ? 'Загрузка...' : 'Войти'}
             </Button>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', width: '399px', alignSelf: 'center', mt: '16px' }}>
+              <Box sx={{ flex: 1, height: '1px', backgroundColor: '#EDEDED', mr: '10px' }} />
+              <Typography sx={{ fontSize: '14px', color: '#9E9E9E', whiteSpace: 'nowrap' }}>или</Typography>
+              <Box sx={{ flex: 1, height: '1px', backgroundColor: '#EDEDED', ml: '10px' }} />
+            </Box>
           </Box>
 
           <Box sx={{ textAlign: 'center', mt: 3 }}>
             <Typography sx={{ fontSize: '14px', color: '#616161' }}>
               Нет аккаунта?{' '}
-              <Link href="#" underline="hover" sx={{ fontWeight: '600', cursor: 'pointer' }}>
+              <Link href="#" underline="hover" sx={{ fontWeight: '600', cursor: 'pointer', color: '#242EDB', textDecoration: 'underline' }}>
                 Создать
               </Link>
             </Typography>
